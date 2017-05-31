@@ -1,5 +1,8 @@
 window.onload=function() {
-    canv = document.getElementById("gameScreen");
+    //var canv = $('#gameScreen');
+    canv = $('#gameScreen').get(0);
+
+    console.log(canv);
     ctx = canv.getContext("2d");
     document.addEventListener("keydown",keyPush);
     setInterval(game,1000/15);
@@ -19,6 +22,8 @@ var tail = 5;
 
 
 function game() {
+
+   //When snake is touching the border move snake to other side
     px+=xv;
     py+=yv;
     if(px<0) {
@@ -36,10 +41,11 @@ function game() {
     ctx.fillStyle="black";
     ctx.fillRect(0,0,canv.width,canv.height);
 
+
     ctx.fillStyle="lime";
 
 
-    for(var i=0;i<trail.length;i++) {
+    for(var i=0 ; i<trail.length; i++ ) {
         ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
         if(trail[i].x==px && trail[i].y==py) {
             tail = 5;
@@ -55,8 +61,11 @@ function game() {
         ax=Math.floor(Math.random()*tc);
         ay=Math.floor(Math.random()*tc);
     }
+
     ctx.fillStyle="red";
     ctx.fillRect(ax*gs,ay*gs,gs-2,gs-2);
+
+
 }
 function keyPush(evt) {
     switch(evt.keyCode) {
